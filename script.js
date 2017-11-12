@@ -15,7 +15,7 @@ var url = 'https://www.youtube.com/embed/' + videos[today] + '?rel=0&amp;control
 
 iframe.setAttribute('src', url);
 
-window.onresize = function () {
+window.onresize = function() {
   width = window.innerWidth;
   height = window.innerHeight;
 
@@ -27,7 +27,7 @@ window.onresize = function () {
 var numbersContainer = document.getElementById('numbers');
 numbersContainer.onclick = changeVideoCallback;
 
-function changeVideoCallback(event) {
+function changeVideoCallback (event) {
   var number = event.target.innerText;
   if (number > today) return;
 
@@ -46,6 +46,8 @@ for (var i = 1; i <= 25; i++) {
   var dayElement = document.createElement('span');
   dayElement.id = i;
 
+  dayElement.classList.add('number');
+
   if (i <= today) dayElement.classList.add('active');
   else dayElement.classList.add('inactive');
   if (i === today) dayElement.classList.add('selected');
@@ -54,25 +56,38 @@ for (var i = 1; i <= 25; i++) {
   numbersContainer.appendChild(dayElement);
 }
 
-// fade out numbers and buttons when mouse is out of window
+// fade out numbers and buttons when mouse isn't moving
 var bodyElement = document.getElementById('body');
 var numbersElement = document.getElementById('numbers')
 var aboutElement = document.getElementById('about-container');
+var timeoutId = null;
 
-bodyElement.addEventListener("mouseenter", function () { fadeIn(numbersElement); fadeIn(aboutElement); });
-bodyElement.addEventListener("mouseleave", function () { fadeOut(numbersElement); fadeOut(aboutElement) });
+timeoutId = setTimeout(function () {
+  fadeOut(numbersElement);
+  fadeOut(aboutElement);
+}, 4000);
 
-function fadeIn(element) {
+bodyElement.addEventListener('mousemove', function (e) {
+  if (timeoutId !== null) clearInterval(timeoutId);
+
+  fadeIn(numbersElement); 
+  fadeIn(aboutElement);
+
+  timeoutId = setTimeout(function () {
+    if (e.target.id === 'about' || e.target.id === 'numbers' || e.target.classList.contains('number')) return;
+    fadeOut(numbersElement); 
+    fadeOut(aboutElement);
+  }, 4000);
+});
+
+function fadeIn (element) {
   element.classList.remove('disappear');
   element.classList.add('appear');
 }
 
-function fadeOut(element) {
-  setTimeout(function () {
-    element.classList.add('disappear');
-    element.classList.remove('appear')
-  },
-    1000);
+function fadeOut (element) {
+  element.classList.add('disappear');
+  element.classList.remove('appear');
 }
 
 // show and hide the about modal
@@ -82,12 +97,16 @@ var closeBtnEl = document.getElementById('modal-close');
 aboutElement.onclick = openModal;
 closeBtnEl.onclick = closeModal;
 
-function openModal() {
-  modalEl.classList.add('opened');
-  modalEl.classList.remove('closed');
+function openModal () {
+  modalEl.classList.remove("hidden");
+  setTimeout(function() {
+    modalEl.classList.remove('closed');
+    modalEl.classList.add('opened');
+  }, 0);
 }
 
-function closeModal() {
+function closeModal () {
   modalEl.classList.remove('opened');
   modalEl.classList.add('closed');
+  setTimeout(function () { modalEl.classList.add("hidden") }, 300);
 }
