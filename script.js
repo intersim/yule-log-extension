@@ -7,7 +7,7 @@ var titleElement = document.getElementsByTagName('title')[0];
 
 // if it's not december...
 if (month !== 12) {
-  titleElement.innerText = 'Coming Soon!'
+  titleElement.innerText = 'Yule Log Life'
 
   var backgroundElement = document.getElementById('background');
   var aboutElement = document.getElementById('about');
