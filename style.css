@@ -123,6 +123,10 @@ iframe {
   font-family: 'Playfair Display';
 }
 
+#modal a {
+  color: white;
+}
+
 #modal-close {
   float: right;
   position: relative;
@@ -172,4 +176,14 @@ p:last-of-type {
 
 .italic {
   font-style: italic;
+}
+
+#background {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
