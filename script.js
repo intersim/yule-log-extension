@@ -1,23 +1,20 @@
 // get the date
-var today = (new Date()).getDate();
+var date = (new Date()).getDate();
+var today = date <= 25 ? date : 25;
 var month = (new Date()).getMonth() + 1; // getMonth returns a zero-based value
 var selected = today;
 
-var titleElement = document.getElementsByTagName('title')[0];
-
 // if it's not december...
 if (month !== 12) {
-  titleElement.innerText = 'Yule Log Life'
-
   var backgroundElement = document.getElementById('background');
   var aboutElement = document.getElementById('about');
+  var modalElement = document.getElementById('modal');
   aboutElement.classList.add('hidden');
+  modalElement.classList.add('hidden');
 
-  background.innerText = 'Yule Log Life starts on December 1st'
+  background.innerText = "YuleLog.Life starts on December 1st"
 }
 else {
-  titleElement.innerText = today + ' | Yule Log Life'
-
   // create video
   var width = window.innerWidth;
   var height = window.innerHeight;
@@ -27,11 +24,11 @@ else {
   iframe.setAttribute('width', width);
   iframe.setAttribute('height', height);
 
-  var url = 'https://www.youtube.com/embed/' + videos[today] + '?rel=0&amp;controls=0&amp;showinfo=0;autoplay=1';
+  var url = 'https://www.youtube.com/embed/' + videos[today] + '?rel=0&amp;controls=0&amp;showinfo=0;autoplay=1;iv_load_policy=3';
 
   iframe.setAttribute('src', url);
 
-  window.onresize = function() {
+  window.onresize = function () {
     width = window.innerWidth;
     height = window.innerHeight;
 
@@ -43,7 +40,7 @@ else {
   var numbersContainer = document.getElementById('numbers');
   numbersContainer.onclick = changeVideoCallback;
 
-  function changeVideoCallback (event) {
+  function changeVideoCallback(event) {
     var number = event.target.innerText;
     if (number > today) return;
 
@@ -54,7 +51,7 @@ else {
     selected = number;
     dayElement.classList.add('selected');
 
-    var url = 'https://www.youtube.com/embed/' + videos[number] + '?rel=0&amp;controls=0&amp;showinfo=0;autoplay=1';
+    var url = 'https://www.youtube.com/embed/' + videos[number] + '?rel=0&amp;controls=0&amp;showinfo=0;autoplay=1;iv_load_policy=3';
     iframe.setAttribute('src', url);
   }
 
@@ -86,25 +83,48 @@ else {
   bodyElement.addEventListener('mousemove', function (e) {
     if (timeoutId !== null) clearInterval(timeoutId);
 
-    fadeIn(numbersElement); 
+    fadeIn(numbersElement);
     fadeIn(aboutElement);
 
     timeoutId = setTimeout(function () {
       if (e.target.id === 'about' || e.target.id === 'numbers' || e.target.classList.contains('number')) return;
-      fadeOut(numbersElement); 
+      fadeOut(numbersElement);
       fadeOut(aboutElement);
-    }, 4000);
+    }, 3000);
   });
 
-  function fadeIn (element) {
+  function fadeIn(element) {
     element.classList.remove('disappear');
     element.classList.add('appear');
   }
 
-  function fadeOut (element) {
+  function fadeOut(element) {
     element.classList.add('disappear');
     element.classList.remove('appear');
   }
+
+  // fade out numbers and about when mouse leaves the window
+  function addEvent(obj, evt, fn) {
+    if (obj.addEventListener) {
+      obj.addEventListener(evt, fn, false);
+    }
+    else if (obj.attachEvent) {
+      obj.attachEvent("on" + evt, fn);
+    }
+  }
+
+  addEvent(window, "load", function (e) {
+    addEvent(document, "mouseout", function (e) {
+      e = e ? e : window.event;
+      var from = e.relatedTarget || e.toElement;
+      if (!from || from.nodeName == "HTML") {
+        timeoutId = setTimeout(function () {
+          fadeOut(numbersElement);
+          fadeOut(aboutElement);
+        }, 3000);
+      }
+    });
+  });
 
   // show and hide the about modal
   var modalEl = document.getElementById('modal');
@@ -113,15 +133,15 @@ else {
   aboutElement.onclick = openModal;
   closeBtnEl.onclick = closeModal;
 
-  function openModal () {
+  function openModal() {
     modalEl.classList.remove("hidden");
-    setTimeout(function() {
+    setTimeout(function () {
       modalEl.classList.remove('closed');
       modalEl.classList.add('opened');
     }, 0);
   }
 
-  function closeModal () {
+  function closeModal() {
     modalEl.classList.remove('opened');
     modalEl.classList.add('closed');
     setTimeout(function () { modalEl.classList.add("hidden") }, 300);

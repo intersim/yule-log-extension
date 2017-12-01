@@ -10,18 +10,18 @@ var videos = [
 	'sCgqiOzXE-g', // 8. spooky house
 	'Dp9C_0_JeYE', // 9. Hearthstone (Blizzard entertinament)
 	'pdd9b47x67M', // 10. fireplace sounds with howling wind
-	'pCevjyYbEPU', // 11. Mystery Science Theater 3000
-	'Lb0eTSE22pM', // 12. BB8
-	'MBdQ3xGguUQ', // 13. chocolate
-	'MrZmt6_lV6g', // 14. Hobbiton-esque
-	'sswqlnmbTiA', // 15. Fire tornado
-	'eJ5gW2lsxqo', // 16. Idina Menzel
-	'rSPoSdNvbR0', // 17. modern fireplace
-	'26XgIw8xYz8', // 18. lego
-	'puPVtf6SJew', // 19. decorated with snow falling
-	'peHB7jE0ADg', // 20. Lil bub 2015
-	'pjNnzgLpo4s', // 22. Michael Bublé
-	'f_SqrXtuSoc', // 21. Fire log with chemicals
+	'ZuHZSbPJhaY', // 11. Lil bub 2013
+	'pCevjyYbEPU', // 12. Mystery Science Theater 3000
+	'Lb0eTSE22pM', // 13. BB8
+	'MBdQ3xGguUQ', // 14. chocolate
+	'MrZmt6_lV6g', // 15. Hobbiton-esque
+	'sswqlnmbTiA', // 16. Fire tornado
+	'eJ5gW2lsxqo', // 17. Idina Menzel
+	'rSPoSdNvbR0', // 18. modern fireplace
+	'26XgIw8xYz8', // 19. lego
+	'puPVtf6SJew', // 20. decorated with snow falling
+	'peHB7jE0ADg', // 21. Lil bub 2015
+	'f_SqrXtuSoc', // 22. Fire log with chemicals
 	'OmpVeMz9Flw', // 23. decorated fireplace
 	'ya4s9UwDnDI', // 24. boston terrier
 	'Ye2gMvRa-iE' // 25. Hallmark channel
